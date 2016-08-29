@@ -1,0 +1,48 @@
+{
+    "id": "F5473C48-337B-46D3-BAD4-3D65666767F6",
+    "name": "removeduplicatefiles",
+    "friendlyName": "Remove Duplicate Files",
+    "description": "Task deletes files in destination folder if they exist in the source folder.",
+	"helpMarkDown": "[More Information](https://github.com/jeblankenship/vsts-removeduplicatefiles-task#readme)",
+    "category": "Utility",
+    "visibility": [
+        "Build",
+		"Release"
+    ],
+    "author": "James Blankenship",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 2
+    },
+    "minimumAgentVersion": "1.92.0",
+    "inputs": [
+        {
+            "name": "sourceFolder",
+            "type": "filePath",
+            "label": "Source Folder",
+            "defaultValue": "$(build.sourcesdirectory)",
+            "required": true,
+            "helpMarkDown": "Folder containing files to find duplicates of."
+        },
+        {
+            "name": "destinationFolder",
+            "type": "filePath",
+            "label": "Destination",
+            "defaultValue": "$(build.sourcesdirectory)",
+            "required": true,
+            "helpMarkDown": "Folder to remove files from if they exist."
+        }
+    ],
+    "instanceNameFormat": "Remove Duplicate Files",
+    "execution": {
+        "PowerShell": {
+            "target": "$(currentDirectory)\\remove-duplicateFiles.ps1",
+            "argumentFormat": "",
+            "workingDirectory": "$(System.DefaultWorkingDirectory)"
+		}
+    },
+    "messages": {
+        "NoFiles": "Source folder missing."
+    }
+}
